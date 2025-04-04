@@ -64,12 +64,14 @@ public class ProblemSolutions {
      */
 
   public static int lastBoulder(int[] boulders) {
-      PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder()); 
-      for (int b : boulders) pq.add(b); 
+      PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());  //max priority queue
+      for (int b : boulders) 
+          pq.add(b); 
       while (pq.size() > 1) { 
-          int y = pq.poll(); 
-          int x = pq.poll();
-          if (x != y) pq.add(y - x);
+          int y = pq.poll(); //largest
+          int x = pq.poll();// second largest
+          if (x != y) 
+              pq.add(y - x);
       }
       return pq.isEmpty() ? 0 : pq.peek();
   }
@@ -94,13 +96,15 @@ public class ProblemSolutions {
 
     public static ArrayList<String> showDuplicates(ArrayList<String> input) {
         HashMap<String, Integer> countMap = new HashMap<>(); 
-        for (String s : input) countMap.put(s, countMap.getOrDefault(s, 0) + 1);
+        for (String s : input) 
+            countMap.put(s, countMap.getOrDefault(s, 0) + 1); //counts the occurences of each string
 
         ArrayList<String> result = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : countMap.entrySet()) {
-            if (entry.getValue() > 1) result.add(entry.getKey()); 
+            if (entry.getValue() > 1) 
+                result.add(entry.getKey()); // add to the list if the count is greater than 1
         }
-        Collections.sort(result); 
+        Collections.sort(result); //sprt the list
         return result;
     }
 
@@ -141,7 +145,7 @@ public class ProblemSolutions {
 
         for (int num : input) {
             int complement = k - num;
-            if (seen.contains(complement)) {
+            if (seen.contains(complement)) {// checking for a valud pair
                 int a = Math.min(num, complement);
                 int b = Math.max(num, complement);
                 pairs.add("(" + a + ", " + b + ")"); 
@@ -149,7 +153,7 @@ public class ProblemSolutions {
             seen.add(num);
         }
 
-        ArrayList<String> result = new ArrayList<>(pairs);
+        ArrayList<String> result = new ArrayList<>(pairs);// gets it ready for sorting
         Collections.sort(result); 
         return result;
     }
